@@ -3,6 +3,8 @@ package ru.kve.recyclerview;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +12,9 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
   private List<RecyclerViewItem> itemsList = new ArrayList<>();
+  private RecyclerView recyclerViewMain;
+  private RecyclerView.Adapter adapter;
+  private RecyclerView.LayoutManager layoutManager;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +27,13 @@ public class MainActivity extends AppCompatActivity {
         "HAPPY", "I'm happy!"));
     itemsList.add(new RecyclerViewItem(R.drawable.ic_sentiment_neutral_black_24dp,
         "NEUTRAL", "I'm neutral!"));
+
+    recyclerViewMain = findViewById(R.id.recyclerViewMain);
+    recyclerViewMain.setHasFixedSize(true);
+    adapter = new RecyclerViewAdapter(itemsList);
+    layoutManager = new LinearLayoutManager(this);
+    recyclerViewMain.setAdapter(adapter);
+    recyclerViewMain.setLayoutManager(layoutManager);
 
   }
 }
